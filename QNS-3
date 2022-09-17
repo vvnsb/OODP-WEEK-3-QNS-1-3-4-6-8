@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+
+//class called date that has separate member data for day month year
+class Date{
+	int day;
+	int month;
+	int year;
+public:
+	//one constructor should initialize this data to 0 
+	Date(){
+		this->day=0;
+		this->month=0;
+		this->year=0;
+	}
+	//d initialize it to fixed values
+	Date(int d, int m, int y){
+		this->day=d;
+		this->month=m;
+		this->year=y;
+
+
+	}
+	//function displays the date
+	void display() const {
+		cout<<day<<"/"<<month<<"/"<<year<<"\n";
+	}
+	//The function compares two objects of type date passed as arguments
+	//Make appropriate member functions const. 
+	Date compare(Date Date1,Date Date2) const{
+		//aray of days in months
+		int month[] = { 31, 28, 31, 30, 31, 30, 31,
+			31, 30, 31, 30, 31 };
+
+
+		if (Date2.day > Date1.day) {
+			Date1.day+=  month[Date2.month - 1];
+			Date1.month--;
+		}
+		if (Date2.month > Date1.month) {
+			Date1.year--;
+			Date1.month += 12;
+		}
+		
+		int ageDays = Date1.day - Date2.day;
+		int ageMonths = Date1.month - Date2.month;
+		int ageYears =Date1.year - Date2.year;
+		return Date(ageDays,ageMonths,ageYears);
+	}
+
+
+};
+int main(){
+	//A main() program should create two initialized date objects(among these one should contain today's date 
+	Date todayDate(9,7,2021);
+	cout<<"Today's date: ";
+	todayDate.display();
+	//and another one should contain your date of birth) and one that isn’t initialized.
+	cout<<"Birth's date: ";
+	Date birthDate(5,4,1995);
+	birthDate.display();
+	//Then it should compare the two initialized values together, leaving the result in the third date variable. 
+	Date third = third.compare(todayDate, birthDate);
+	//Finally it should display the value of this  third variable. 
+	cout<<"\nThird date (age): ";
+	third.display();
+
+
+	system("pause");
+	return 0;
+    }
